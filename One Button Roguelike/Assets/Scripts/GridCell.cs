@@ -11,7 +11,7 @@ public enum TerrainType
 
 public class GridCell
 {
-    public TerrainType CellTerrain;
+    public readonly TerrainType CellTerrain;
     public Actor CellActor;
     public Pickupable CellPickup;
 
@@ -32,4 +32,8 @@ public class GridCell
         Coordinates = new Vector2Int(x, y);
     }
 
+    public void Occupy(Actor newOccupant)
+    {
+        CellActor = newOccupant;
+    }
 }
