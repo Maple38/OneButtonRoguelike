@@ -5,12 +5,12 @@ namespace DefaultNamespace
 {
     public class Actor : MonoBehaviour
     {
-        private GridMap _parentGrid;
-        private GridCell _currentCell;
         [SerializeField] private Vector2Int spawnCoordinates;
         [SerializeField] private GridMap startingGrid;
+        private GridCell _currentCell;
+        private GridMap _parentGrid;
 
-        void Start()
+        private void Start()
         {
             if (_parentGrid == null)
             {

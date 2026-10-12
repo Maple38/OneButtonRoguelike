@@ -5,7 +5,7 @@ using UnityEngine;
 public enum TerrainType
 {
     Floor,
-    Wall,
+    Wall
     // Pit,
 }
 
@@ -15,6 +15,12 @@ public class GridCell
     public Actor CellActor;
     public Pickupable CellPickup;
 
+    public GridCell(int x, int y, TerrainType terrain)
+    {
+        CellTerrain = terrain;
+        Coordinates = new Vector2Int(x, y);
+    }
+
     public bool HasActor => CellActor != null;
     public bool IsWalkable => CellTerrain switch
     {
@@ -22,15 +28,9 @@ public class GridCell
         TerrainType.Wall => false,
         _ => throw new ArgumentOutOfRangeException()
     };
-    public bool CanEnter() => IsWalkable && !HasActor;
 
     public Vector2Int Coordinates { get; }
-
-    public GridCell(int x, int y, TerrainType terrain)
-    {
-        CellTerrain = terrain;
-        Coordinates = new Vector2Int(x, y);
-    }
+    public bool CanEnter() => IsWalkable && !HasActor;
 
     public void Occupy(Actor newOccupant)
     {
