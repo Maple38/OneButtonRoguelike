@@ -29,7 +29,11 @@ namespace DefaultNamespace
 
         protected void OccupyCell(GridCell newCell)
         {
-            _currentCell.CellActor = null;
+            if (_currentCell != null)
+            {
+                _currentCell.CellActor = null;
+            }
+
             _currentCell = newCell;
             _currentCell.Occupy(this);
             transform.position = _parentGrid.CellWorldPosition(_currentCell.Coordinates);

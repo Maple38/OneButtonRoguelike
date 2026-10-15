@@ -5,10 +5,10 @@ public class GridMap : MonoBehaviour
 {
     [SerializeField] private int width;
     [SerializeField] private int height;
-    private GridCell[][] _cells; // Internal array of cells
+    private GridCell[,] _cells; // Internal array of cells
     private Vector2 _gridDisplayOffset = new(0.5f, 0.5f);
 
-    private void Awake()
+    private void Start()
     {
         if (_cells == null)
         {
@@ -37,11 +37,12 @@ public class GridMap : MonoBehaviour
 
     private void BuildGrid()
     {
+        _cells = new GridCell[width, height];
         for (var x = 0; x < width; x++)
         {
             for (var y = 0; y < height; y++)
             {
-                _cells[x][y] = new GridCell(x, y, TerrainType.Floor);
+                _cells[x, y] = new GridCell(x, y, TerrainType.Floor);
             }
         }
     }
@@ -55,6 +56,6 @@ public class GridMap : MonoBehaviour
             throw new ArgumentOutOfRangeException();
         }
 
-        return _cells[pos.x][pos.y];
+        return _cells[pos.x, pos.y];
     }
 }
