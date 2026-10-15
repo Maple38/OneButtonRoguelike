@@ -27,7 +27,7 @@ namespace DefaultNamespace
             }
         }
 
-        private void OccupyCell(GridCell newCell)
+        protected void OccupyCell(GridCell newCell)
         {
             _currentCell.CellActor = null;
             _currentCell = newCell;
@@ -35,7 +35,7 @@ namespace DefaultNamespace
             transform.position = _parentGrid.CellWorldPosition(_currentCell.Coordinates);
         }
 
-        private void TryMove(Vector2Int moveVector)
+        protected void TryMove(Vector2Int moveVector)
         {
             GridCell targetCell;
             try
