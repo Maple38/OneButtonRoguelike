@@ -14,6 +14,7 @@ public class GameClock : MonoBehaviour
 
     void Awake()
     {
+        GameClock.Instance = this;
         _tickWheel = new List<ITickAgent>[wheelSize];
         _tickInterval = bpm / 60f;
     }
