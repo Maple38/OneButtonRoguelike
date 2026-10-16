@@ -5,18 +5,23 @@ namespace DefaultNamespace
 {
     public class Actor : Entity
     {
-        protected GridCell CurrentCell;
+        private GridCell _currentCell;
 
-        protected override void MoveToCell(GridCell cell)
+        protected override void OccupyCell(GridCell cell)
         {
-            if (CurrentCell != null)
+            base.OccupyCell(cell);
+            _currentCell.GrabPickup(this);
+        }
+
+        protected override void SetCell(GridCell cell)
+        {
+            if (_currentCell != null)
             {
-                CurrentCell.CellActor = null;
+                _currentCell.Vacate(this);
             }
 
-            CurrentCell = cell;
-            OccupyCell(cell);
-            CurrentCell.GrabPickup(this);
+            cell.Register(this);
+            _currentCell = cell;
         }
 
         protected void TryMove(Vector2Int moveVector)
@@ -24,7 +29,7 @@ namespace DefaultNamespace
             GridCell targetCell;
             try
             {
-                targetCell = ParentGrid.GetCell(CurrentCell.Coordinates + moveVector);
+                targetCell = ParentGrid.GetCell(_currentCell.Coordinates + moveVector);
             }
             catch (ArgumentOutOfRangeException)
             {

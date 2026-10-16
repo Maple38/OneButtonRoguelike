@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
     [SerializeField] private Vector2Int spawnCoordinates;
     [SerializeField] private GridMap startingGrid;
     protected GridMap ParentGrid;
 
 
-    protected void Start()
+    protected virtual void Start()
     {
         if (ParentGrid == null)
         {
@@ -15,20 +15,20 @@ public class Entity : MonoBehaviour
         }
     }
 
-    protected void OccupyCell(GridCell cell)
+    protected virtual void OccupyCell(GridCell cell)
     {
-        cell.Occupy(this);
+        SetCell(cell);
         transform.position = ParentGrid.CellWorldPosition(cell.Coordinates);
     }
+
+    protected abstract void SetCell(GridCell cell);
 
     public void Init(GridMap parentGrid, Vector2Int cellCoordinate)
     {
         if (ParentGrid == null)
         {
             ParentGrid = parentGrid;
-            MoveToCell(ParentGrid.GetCell(cellCoordinate));
+            OccupyCell(ParentGrid.GetCell(cellCoordinate));
         }
     }
-
-    protected virtual void MoveToCell(GridCell cell) => OccupyCell(cell);
 }

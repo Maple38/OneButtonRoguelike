@@ -12,8 +12,8 @@ public enum TerrainType
 public class GridCell
 {
     public readonly TerrainType CellTerrain;
-    public Actor CellActor;
-    public Pickupable CellPickup;
+    public Actor CellActor { get; private set; }
+    public Pickupable CellPickup { get; private set; }
 
     public GridCell(int x, int y, TerrainType terrain)
     {
@@ -22,6 +22,8 @@ public class GridCell
     }
 
     public bool HasActor => CellActor != null;
+    public bool HasPickup => CellPickup != null;
+
     public bool IsWalkable => CellTerrain switch
     {
         TerrainType.Floor => true,
@@ -31,10 +33,28 @@ public class GridCell
 
     public Vector2Int Coordinates { get; }
     public bool CanEnter() => IsWalkable && !HasActor;
-    
-    public void Occupy(Actor newOccupant)
+
+    public void Register(Pickupable pickupable)
     {
-        CellActor = newOccupant;
+        CellPickup = pickupable;
+    }
+
+    public void Register(Actor actor)
+    {
+        CellActor = actor;
+    }
+
+    public void Vacate(Actor actor)
+    {
+        if (CellActor == actor)
+        {
+            CellActor = null;
+        }
+    }
+
+    public void ClearPickup()
+    {
+        CellPickup = null;
     }
 
     public void GrabPickup(Actor actor)
@@ -43,5 +63,7 @@ public class GridCell
         {
             CellPickup.OnPickup(actor);
         }
+
+        ClearPickup();
     }
 }
