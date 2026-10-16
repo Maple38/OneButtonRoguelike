@@ -1,7 +1,6 @@
 using DefaultNamespace;
-using UnityEngine;
 
-public abstract class Pickupable : MonoBehaviour
+public abstract class Pickupable : Entity
 {
     public abstract void OnPickup(Actor actor);
 }
