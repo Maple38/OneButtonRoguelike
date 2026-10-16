@@ -649,6 +649,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map
       objectReference: {fileID: 0}
+    - target: {fileID: 5218846890128429360, guid: cdae7128a6ffb4e78805a75a5a7c09a2, type: 3}
+      propertyPath: tileFloor1
+      value: 
+      objectReference: {fileID: 11400000, guid: 0360ef151839c41d6b11f903988a702e, type: 2}
+    - target: {fileID: 5218846890128429360, guid: cdae7128a6ffb4e78805a75a5a7c09a2, type: 3}
+      propertyPath: tileFloor2
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f4f461a8c8024cd492cb2a273e101c2, type: 2}
+    - target: {fileID: 5701303705751330412, guid: cdae7128a6ffb4e78805a75a5a7c09a2, type: 3}
+      propertyPath: m_CellGap.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701303705751330412, guid: cdae7128a6ffb4e78805a75a5a7c09a2, type: 3}
+      propertyPath: m_CellGap.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701303705751330412, guid: cdae7128a6ffb4e78805a75a5a7c09a2, type: 3}
+      propertyPath: m_CellSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701303705751330412, guid: cdae7128a6ffb4e78805a75a5a7c09a2, type: 3}
+      propertyPath: m_CellSize.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6615617422386465303, guid: cdae7128a6ffb4e78805a75a5a7c09a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -755,7 +779,7 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 577935023}
+  - {fileID: 950497175}
   - {fileID: 1010789025}
   - {fileID: 1409456621}
   - {fileID: 1248913852}
-  - {fileID: 950497175}

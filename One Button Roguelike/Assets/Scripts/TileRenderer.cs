@@ -6,7 +6,9 @@ using UnityEngine.Tilemaps;
 public class TileRenderer : MonoBehaviour
 {
     [SerializeField] private TileBase tileWall;
-    [SerializeField] private TileBase tileFloor;
+    [SerializeField] private TileBase tileFloor1;
+    [SerializeField] private TileBase tileFloor2;
+
     private Tilemap _tilemap;
 
     private void Awake()
@@ -26,7 +28,7 @@ public class TileRenderer : MonoBehaviour
         {
             tiles[index] = cell.CellTerrain switch
             {
-                TerrainType.Floor => tileFloor,
+                TerrainType.Floor => (cell.Coordinates.x + cell.Coordinates.y) % 2 == 0 ? tileFloor1 : tileFloor2,
                 TerrainType.Wall => tileWall,
                 _ => throw new ArgumentOutOfRangeException()
             };
