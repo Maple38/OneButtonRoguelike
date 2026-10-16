@@ -37,6 +37,8 @@ namespace DefaultNamespace
             _currentCell = newCell;
             _currentCell.Occupy(this);
             transform.position = _parentGrid.CellWorldPosition(_currentCell.Coordinates);
+
+            _currentCell.GrabPickup(this);
         }
 
         protected void TryMove(Vector2Int moveVector)

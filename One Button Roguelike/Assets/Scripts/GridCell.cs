@@ -31,9 +31,17 @@ public class GridCell
 
     public Vector2Int Coordinates { get; }
     public bool CanEnter() => IsWalkable && !HasActor;
-
+    
     public void Occupy(Actor newOccupant)
     {
         CellActor = newOccupant;
+    }
+
+    public void GrabPickup(Actor actor)
+    {
+        if (CellPickup != null)
+        {
+            CellPickup.OnPickup(actor);
+        }
     }
 }
