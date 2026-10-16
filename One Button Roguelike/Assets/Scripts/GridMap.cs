@@ -7,6 +7,13 @@ public class GridMap : MonoBehaviour
     [SerializeField] private int height;
     private GridCell[,] _cells; // Internal array of cells
     private Vector2 _gridDisplayOffset = new(0.5f, 0.5f);
+    private TileRenderer _tileRenderer;
+
+    private void Awake()
+    {
+        _tileRenderer = GetComponent<TileRenderer>();
+    }
+    
 
     private void Start()
     {
@@ -45,6 +52,8 @@ public class GridMap : MonoBehaviour
                 _cells[x, y] = new GridCell(x, y, TerrainType.Floor);
             }
         }
+
+        _tileRenderer.RenderTiles(_cells);
     }
 
     public Vector2 CellWorldPosition(Vector2Int pos) => pos + (Vector2)transform.position;
