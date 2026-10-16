@@ -57,7 +57,7 @@ public class GridMap : MonoBehaviour
 
     public GridCell GetCell(Vector2Int pos)
     {
-        if (pos.x < 0 || pos.y < 0 || pos.x > width || pos.y > height)
+        if (pos.x < 0 || pos.y < 0 || pos.x >= width || pos.y >= height)
         {
             throw new ArgumentOutOfRangeException();
         }
