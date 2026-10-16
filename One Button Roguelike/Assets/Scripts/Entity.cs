@@ -15,7 +15,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    protected virtual void OccupyCell(GridCell cell)
+    public virtual void OccupyCell(GridCell cell)
     {
         SetCell(cell);
         transform.position = ParentGrid.CellWorldPosition(cell.Coordinates);

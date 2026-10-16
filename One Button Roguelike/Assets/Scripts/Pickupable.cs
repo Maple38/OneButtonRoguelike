@@ -1,7 +1,8 @@
-using DefaultNamespace;
-
-public abstract class Pickupable : Entity
+public class Pickupable : Entity
 {
-    public abstract void OnPickup(Actor actor);
+    public void OnPickup()
+    {
+        GameManager.Instance.Reposition(this);
+    }
     protected override void SetCell(GridCell cell) => cell.Register(this);
 }

@@ -61,7 +61,7 @@ public class GridCell
     {
         if (CellPickup != null)
         {
-            CellPickup.OnPickup(actor);
+            CellPickup.OnPickup();
         }
 
         ClearPickup();

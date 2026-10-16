@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class GridMap : MonoBehaviour
 {
-    [SerializeField] private int width;
-    [SerializeField] private int height;
+    public int width;
+    public int height;
     private GridCell[,] _cells; // Internal array of cells
     private Vector2 TileWorldOffset => transform.TransformPoint(new Vector2(0.5f, 0.5f));
     private TileRenderer _tileRenderer;
@@ -18,6 +18,9 @@ public class GridMap : MonoBehaviour
         }
 
     }
+
+    public static int StepsBetween(Vector2Int start, Vector2Int end) =>
+        Math.Abs(end.x - start.x) + Math.Abs(end.y - start.y);
 
     private void OnDrawGizmos()
     {
