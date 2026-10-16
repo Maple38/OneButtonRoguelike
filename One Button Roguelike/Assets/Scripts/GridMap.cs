@@ -12,15 +12,11 @@ public class GridMap : MonoBehaviour
     private void Awake()
     {
         _tileRenderer = GetComponent<TileRenderer>();
-    }
-    
-
-    private void Start()
-    {
         if (_cells == null)
         {
             BuildGrid();
         }
+
     }
 
     private void OnDrawGizmos()
