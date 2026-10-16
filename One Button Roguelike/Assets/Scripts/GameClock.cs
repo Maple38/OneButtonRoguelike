@@ -14,8 +14,8 @@ public class GameClock : MonoBehaviour
 
     void Awake()
     {
-        GameClock.Instance = this;
-        _tickInterval = bpm / 60f;
+        Instance = this;
+        _tickInterval = bpm > 0 ? 60f / bpm : 1f;
         _tickWheel = new List<ITickAgent>[wheelSize];
         for (int i = 0; i < wheelSize; i++)
         {
@@ -35,7 +35,8 @@ public class GameClock : MonoBehaviour
 
     void DoTick()
     {
-        List<ITickAgent> moveQueue = _tickWheel[_currentTick];
+        var moveQueue = new List<ITickAgent>(_tickWheel[_currentTick]);
+        _tickWheel[_currentTick].Clear();
             foreach (var target in moveQueue)
             {
                 int nextDelay = target.OnTick();
@@ -45,13 +46,7 @@ public class GameClock : MonoBehaviour
                 }
             }
 
-            moveQueue.Clear();
-
-        _currentTick++;
-        if (_currentTick >= wheelSize - 1)
-        {
-            _currentTick = 0;
-        }
+            _currentTick = (_currentTick + 1) % wheelSize;
     }
 
     public void ScheduleTick(ITickAgent target, int delay)

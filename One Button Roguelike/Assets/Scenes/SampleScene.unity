@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &144373912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6908385880260410630, guid: cdae7128a6ffb4e78805a75a5a7c09a2, type: 3}
+  m_PrefabInstance: {fileID: 1248913852}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4fa3da936b94eea88bfd57b40ec933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridMap
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   spawnCoordinates: {x: 1, y: 1}
-  startingGrid: {fileID: 0}
+  startingGrid: {fileID: 144373912}
   moveInterval: 1
 --- !u!1 &619394800
 GameObject:
