@@ -11,11 +11,13 @@ public class TileRenderer : MonoBehaviour
 
     private void Awake()
     {
-        _tilemap = GetComponentInChildren<Tilemap>();
+        LinkTilemap();
     }
 
     public void RenderTiles(GridCell[,] cellArray)
     {
+        LinkTilemap();
+        
         var totalCells = cellArray.Length;
         var positions = new Vector3Int[totalCells];
         var tiles = new TileBase[totalCells];
@@ -36,4 +38,12 @@ public class TileRenderer : MonoBehaviour
         _tilemap.ClearAllTiles();
         _tilemap.SetTiles(positions, tiles);
     }
+
+    private void LinkTilemap()
+    {
+        if (_tilemap == null)
+        {
+            _tilemap = GetComponentInChildren<Tilemap>();
+        }
+    }    
 }
