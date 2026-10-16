@@ -10,7 +10,7 @@ namespace DefaultNamespace
         private GridCell _currentCell;
         private GridMap _parentGrid;
 
-        private void Start()
+        protected virtual void Start()
         {
             if (_parentGrid == null)
             {

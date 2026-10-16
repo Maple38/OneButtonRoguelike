@@ -6,8 +6,10 @@ public class Player : Actor, ITickAgent
 {
     [SerializeField] private int moveInterval;
     private InputAction _actionMain;
-    void Start()
+
+    protected override void Start()
     {
+        base.Start();
         _actionMain = InputSystem.actions.FindAction("Jump");
         GameClock.Instance.ScheduleTick(this, moveInterval);
     }
