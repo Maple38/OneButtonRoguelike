@@ -26,11 +26,12 @@ public class GridMap : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
+        var gizmoOffset = (Vector2)transform.TransformPoint(_gridDisplayOffset);
         for (var x = 0; x < width; x++)
         {
             for (var y = 0; y < height; y++)
             {
-                Gizmos.DrawSphere(new Vector2(x, y) + _gridDisplayOffset, 0.1f);
+                Gizmos.DrawSphere(new Vector2(x, y) + gizmoOffset, 0.1f);
             }
         }
     }
