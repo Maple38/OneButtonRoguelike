@@ -5,9 +5,9 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(GridMap))]
 public class TileRenderer : MonoBehaviour
 {
+    [SerializeField] private TileBase tileWall;
+    [SerializeField] private TileBase tileFloor;
     private Tilemap _tilemap;
-    private Tile _tileWall;
-    private Tile _tileFloor;
 
     private void Awake()
     {
@@ -16,16 +16,24 @@ public class TileRenderer : MonoBehaviour
 
     public void RenderTiles(GridCell[,] cellArray)
     {
-        _tilemap.ClearAllTiles();
+        var totalCells = cellArray.Length;
+        var positions = new Vector3Int[totalCells];
+        var tiles = new TileBase[totalCells];
+        var index = 0;
         foreach (var cell in cellArray)
         {
-            var tileToDraw = cell.CellTerrain switch
+            tiles[index] = cell.CellTerrain switch
             {
-                TerrainType.Floor => _tileFloor,
-                TerrainType.Wall => _tileWall,
+                TerrainType.Floor => tileFloor,
+                TerrainType.Wall => tileWall,
                 _ => throw new ArgumentOutOfRangeException()
             };
-            _tilemap.SetTile((Vector3Int)cell.Coordinates, tileToDraw);
+
+            positions[index] = (Vector3Int)cell.Coordinates;
+            index++;
         }
+
+        _tilemap.ClearAllTiles();
+        _tilemap.SetTiles(positions, tiles);
     }
 }
