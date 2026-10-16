@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -18,6 +19,13 @@ public class TileRenderer : MonoBehaviour
         _tilemap.ClearAllTiles();
         foreach (var cell in cellArray)
         {
+            var tileToDraw = cell.CellTerrain switch
+            {
+                TerrainType.Floor => _tileFloor,
+                TerrainType.Wall => _tileWall,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            _tilemap.SetTile((Vector3Int)cell.Coordinates, tileToDraw);
         }
     }
 }
