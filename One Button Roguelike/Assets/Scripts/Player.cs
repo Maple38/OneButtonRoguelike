@@ -4,14 +4,19 @@ using UnityEngine.InputSystem;
 
 public class Player : Actor, ITickAgent
 {
-    [SerializeField] private int moveInterval;
     private InputAction _actionMain;
+    [SerializeField] private int partialTurnOnTick;
+    [SerializeField] private int fullTurnOnTick;
+    private int _tick;
+    private int _cardinalRotation;
+    [SerializeField] private int partialTurnAngle;
 
     protected override void Start()
     {
         base.Start();
         _actionMain = InputSystem.actions.FindAction("Jump");
-        GameClock.Instance.ScheduleTick(this, moveInterval);
+        GameClock.Instance.ScheduleOnTick(this, partialTurnOnTick);
+        GameClock.Instance.ScheduleOnTick(this, fullTurnOnTick);
     }
 
     void Update()
@@ -22,9 +27,30 @@ public class Player : Actor, ITickAgent
         }
     }
 
-    public int OnTick()
+    public int? OnTick(int tick)
     {
-        transform.Rotate(0, 0, -90);
-        return moveInterval;
+        if (tick == fullTurnOnTick)
+        {
+            FullTurn();
+        }
+        else if (tick == partialTurnOnTick)
+        {
+            PartialTurn();
+        }
+
+        return null;
+    }
+
+    private void FullTurn()
+    {
+        _cardinalRotation = (_cardinalRotation + 1) % 3;
+        transform.rotation = Quaternion.Euler(0, 0, _cardinalRotation * 90);
+        GameClock.Instance.ScheduleOnTick(this, fullTurnOnTick);
+    }
+
+    private void PartialTurn()
+    {
+        transform.Rotate(0, 0, partialTurnAngle);
+        GameClock.Instance.ScheduleOnTick(this, partialTurnOnTick);
     }
 }

@@ -23,7 +23,7 @@ public class GameClock : MonoBehaviour
             _tickWheel[i] = new List<ITickAgent>();
         }
     }
-
+    
     public void ActivateTimer()
     {
         if (!_timerActive)
@@ -33,6 +33,7 @@ public class GameClock : MonoBehaviour
             DoTick();
         }
     }
+
     void Update()
     {
         if (_timerActive)
@@ -50,20 +51,26 @@ public class GameClock : MonoBehaviour
     {
         var moveQueue = new List<ITickAgent>(_tickWheel[_currentTick]);
         _tickWheel[_currentTick].Clear();
-            foreach (var target in moveQueue)
+        foreach (var target in moveQueue)
+        {
+            var nextDelay = target.OnTick(_currentTick) ?? 0;
+            if (nextDelay > 0)
             {
-                int nextDelay = target.OnTick();
-                if (nextDelay > 0)
-                {
-                    ScheduleTick(target, nextDelay);
-                }
+                ScheduleDelay(target, nextDelay);
             }
+        }
 
-            _currentTick = (_currentTick + 1) % wheelSize;
+        _currentTick = (_currentTick + 1) % wheelSize;
     }
 
-    public void ScheduleTick(ITickAgent target, int delay)
+    public void ScheduleDelay(ITickAgent target, int delay)
     {
-        _tickWheel[(_currentTick + delay) % wheelSize].Add(target);
+        ScheduleOnTick(target, (_currentTick + delay) % wheelSize);
     }
+
+    public void ScheduleOnTick(ITickAgent target, int tickNumber)
+    {
+        _tickWheel[tickNumber].Add(target);
+    }
+
 }

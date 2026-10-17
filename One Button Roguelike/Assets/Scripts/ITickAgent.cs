@@ -1,4 +1,4 @@
 public interface ITickAgent
 {
-    int OnTick();
+    int? OnTick(int tick);
 }
