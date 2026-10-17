@@ -10,6 +10,7 @@ public class GameClock : MonoBehaviour
     private int _currentTick;
     private float _tickInterval;
     private float _tickTimer;
+    private bool _timerActive;
 
 
     void Awake()
@@ -23,13 +24,25 @@ public class GameClock : MonoBehaviour
         }
     }
 
+    public void ActivateTimer()
+    {
+        if (!_timerActive)
+        {
+            _timerActive = true;
+            _currentTick++;
+            DoTick();
+        }
+    }
     void Update()
     {
-        _tickTimer += Time.deltaTime;
-        while (_tickTimer >= _tickInterval)
+        if (_timerActive)
         {
-            _tickTimer -= _tickInterval;
-            DoTick();
+            _tickTimer += Time.deltaTime;
+            while (_tickTimer >= _tickInterval)
+            {
+                _tickTimer -= _tickInterval;
+                DoTick();
+            }
         }
     }
 
