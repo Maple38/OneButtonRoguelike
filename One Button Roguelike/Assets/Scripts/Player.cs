@@ -43,7 +43,7 @@ public class Player : Actor, ITickAgent
 
     private void FullTurn()
     {
-        _cardinalRotation = (_cardinalRotation + 1) % 3;
+        _cardinalRotation = (_cardinalRotation + 1) % 4;
         transform.rotation = Quaternion.Euler(0, 0, _cardinalRotation * 90);
         GameClock.Instance.ScheduleOnTick(this, fullTurnOnTick);
     }

@@ -374,9 +374,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   spawnCoordinates: {x: 4, y: 1}
   startingGrid: {fileID: 144373912}
-  partialTurnOnTick: 8
+  partialTurnOnTick: 6
   fullTurnOnTick: 1
-  partialTurnAngle: 15
+  partialTurnAngle: 8
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5065c551ec04fc9a795299a6c52aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameClock
-  bpm: 720
+  bpm: 600
   wheelSize: 8
 --- !u!4 &1409456621
 Transform:
