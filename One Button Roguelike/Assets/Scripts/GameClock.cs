@@ -3,38 +3,28 @@ using UnityEngine;
 
 public class GameClock : MonoBehaviour
 {
-    [SerializeField] private int bpm;
     public static GameClock Instance;
+    [SerializeField] private int bpm;
     [SerializeField] private int wheelSize;
-    private List<ITickAgent>[] _tickWheel;
     private int _currentTick;
     private float _tickInterval;
     private float _tickTimer;
+    private List<ITickAgent>[] _tickWheel;
     private bool _timerActive;
 
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
         _tickInterval = bpm > 0 ? 60f / bpm : 1f;
         _tickWheel = new List<ITickAgent>[wheelSize];
-        for (int i = 0; i < wheelSize; i++)
+        for (var i = 0; i < wheelSize; i++)
         {
             _tickWheel[i] = new List<ITickAgent>();
         }
     }
-    
-    public void ActivateTimer()
-    {
-        if (!_timerActive)
-        {
-            _timerActive = true;
-            _currentTick++;
-            DoTick();
-        }
-    }
 
-    void Update()
+    private void Update()
     {
         if (_timerActive)
         {
@@ -47,7 +37,17 @@ public class GameClock : MonoBehaviour
         }
     }
 
-    void DoTick()
+    public void ActivateTimer()
+    {
+        if (!_timerActive)
+        {
+            _timerActive = true;
+            _currentTick++;
+            DoTick();
+        }
+    }
+
+    private void DoTick()
     {
         var moveQueue = new List<ITickAgent>(_tickWheel[_currentTick]);
         _tickWheel[_currentTick].Clear();
@@ -72,5 +72,4 @@ public class GameClock : MonoBehaviour
     {
         _tickWheel[tickNumber].Add(target);
     }
-
 }

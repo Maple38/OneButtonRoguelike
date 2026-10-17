@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     [SerializeField] private Player player;
     [SerializeField] private GridMap mainGrid;
-    public static GameManager Instance;
     [SerializeField] private float minObjectiveDistance;
 
     private void Awake()

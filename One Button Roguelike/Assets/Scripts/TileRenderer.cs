@@ -19,7 +19,7 @@ public class TileRenderer : MonoBehaviour
     public void RenderTiles(GridCell[,] cellArray)
     {
         LinkTilemap();
-        
+
         var totalCells = cellArray.Length;
         var positions = new Vector3Int[totalCells];
         var tiles = new TileBase[totalCells];
@@ -47,5 +47,5 @@ public class TileRenderer : MonoBehaviour
         {
             _tilemap = GetComponentInChildren<Tilemap>();
         }
-    }    
+    }
 }

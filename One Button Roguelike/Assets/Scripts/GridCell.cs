@@ -12,14 +12,15 @@ public enum TerrainType
 public class GridCell
 {
     public readonly TerrainType CellTerrain;
-    public Actor CellActor { get; private set; }
-    public Pickupable CellPickup { get; private set; }
 
     public GridCell(int x, int y, TerrainType terrain)
     {
         CellTerrain = terrain;
         Coordinates = new Vector2Int(x, y);
     }
+
+    public Actor CellActor { get; private set; }
+    public Pickupable CellPickup { get; private set; }
 
     public bool HasActor => CellActor != null;
     public bool HasPickup => CellPickup != null;

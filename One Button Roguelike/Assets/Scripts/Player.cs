@@ -4,12 +4,12 @@ using UnityEngine.InputSystem;
 
 public class Player : Actor, ITickAgent
 {
-    private InputAction _actionMain;
     [SerializeField] private int partialTurnOnTick;
     [SerializeField] private int fullTurnOnTick;
-    private int _tick;
-    private int _cardinalRotation;
     [SerializeField] private int partialTurnAngle;
+    private InputAction _actionMain;
+    private int _cardinalRotation;
+    private int _tick;
 
     protected override void Start()
     {
@@ -19,7 +19,7 @@ public class Player : Actor, ITickAgent
         GameClock.Instance.ScheduleOnTick(this, fullTurnOnTick);
     }
 
-    void Update()
+    private void Update()
     {
         if (_actionMain.WasPressedThisFrame())
         {
